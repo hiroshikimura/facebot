@@ -37,6 +37,7 @@ gem 'redis-rails', '4.0.0'
 gem 'mechanize', '2.7.4'
 gem 'resque', '1.26.0'
 gem 'slack-api', '1.2.3'
+gem 'slack-notifier'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

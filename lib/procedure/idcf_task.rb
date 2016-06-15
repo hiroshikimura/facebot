@@ -1,8 +1,45 @@
 require 'mechanize'
 require 'nkf'
+require 'slack-notifier'
 
 module Procedure
   class FileNotFoundError < StandardError; end
+
+  class SlackIf
+
+    attr_reader :cfg
+    attr_reader :slk
+
+    def initialize(config)
+      @cfg = config
+      @slk = Slack::Notifier.new(cfg['webhookurl'])
+    end
+
+    def post(incidents)
+      msg = ""
+      incidents.keys.each{|key|
+        e = incidents[key]
+        t = e[:ticket]
+        d = e[:date]
+        b = e[:title]
+        u = e[:url]
+        m = <<-EOC
+--------------------------------------
+チケット番号： #{t}
+日付： #{d}
+タイトル： #{b}
+URL : #{u}
+        EOC
+        msg = "#{msg}#{m}"
+      }
+      begin
+        slk.ping(msg) if incidents.present?
+        slk.ping("なにもないよ") unless incidents.present?
+      rescue => e
+        p e
+      end
+    end
+  end
 
   class IdcfTask
 
@@ -13,11 +50,13 @@ module Procedure
 
     attr_reader :cfg
     attr_reader :redis
+    attr_reader :sender
 
     def initialize(config)
       begin
         @cfg = YAML.load_file(config)[Rails.env]
         @redis = redis_cli()
+        @sender = SlackIf.new(@cfg)
       rescue => e
         raise FileNotFoundError, "file not found #{config}"
       end
@@ -59,7 +98,6 @@ module Procedure
     end
 
     def execute_compare
-binding.pry
       # 掲載中のインシデント
       current_incidents = retrieve_incident(Mechanize.new)
       # 最後に取得したインシデント
@@ -67,7 +105,7 @@ binding.pry
       # 新しい物を抽出
       what_new = compare_incident(current_incidents, last_incidents)
 
-p what_new
+      sender.post(what_new)
     end
 
     def retrieve_incident(agent)
@@ -116,6 +154,7 @@ p what_new
       current.each{|key,value|
         what_new[key] = value unless last.has_key?(key)
       }
+      write_incident(current)
       what_new
     end
   end

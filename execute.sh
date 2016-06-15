@@ -1,3 +1,3 @@
 #!/bin/bash
-cd /home/kimura/facebot/
+cd `dirname $0`
 bundle exec rake idcf:setup["./config/account.yml"]

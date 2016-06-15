@@ -33,8 +33,8 @@ URL : #{u}
         msg = "#{msg}#{m}"
       }
       begin
-        slk.ping(msg) if incidents.present?
-        slk.ping("なにもないよ") unless incidents.present?
+        slk.ping(msg) if incidents.keys.present?
+        slk.ping("新規はないですー") unless incidents.keys.present?
       rescue => e
         p e
       end

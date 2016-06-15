@@ -89,7 +89,6 @@ URL : #{u}
       incidents = {}
       begin
         info = JSON.parse( redis.get('incident') )
-        p "last update date=#{info['date']}"
         incidents = info['info']
       rescue => e
         # ない場合

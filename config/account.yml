@@ -5,8 +5,9 @@
 #   gem 'sqlite3'
 #
 default: &default
-  username: h.kimura
+  username: <%= ENV['IDCFUSER'] %>
   password: <%= ENV["IDCFPWD"] %>
+  webhookurl: <%= ENV['URL'] %>
 
 development:
   <<: *default

@@ -10,5 +10,6 @@ echo 'eval "eval "$(rbenv init -)"' >> ~/.bashrc
 . ~/.bashrc
 
 rbenv install 2.3.1
+rbenv global 2.3.1
 gem install bundler
 bundle install --path=vendor/bundle --local

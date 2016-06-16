@@ -34,7 +34,6 @@ URL : #{u}
       }
       begin
         slk.ping(msg) if incidents.keys.present?
-        slk.ping("新規はないですー") unless incidents.keys.present?
       rescue => e
         p e
       end

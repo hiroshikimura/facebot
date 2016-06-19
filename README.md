@@ -1,5 +1,7 @@
 # facebot
 crawling IDCF NETWORK ALERT
+and
+CHAT-OPS runtime by RonR.
 
 ## 使い方
 
@@ -32,6 +34,7 @@ crawling IDCF NETWORK ALERT
 #### botの使用方法
 1. botrun.shを実行
   - これで、設定した通りのbotが起動します。
+  - 逆に、これを使用しないと再起動とかは機能しません。（終了しちゃう）
 
 ### 応用編
 
@@ -42,4 +45,10 @@ crawling IDCF NETWORK ALERT
   - コマンド名はcase-insencitiveです
   - exec({cmd:, data:}) が呼ばれます
   - dataには、slackから通知された内容が設定されます
-  - インスタンス変数として cfg,client があります
+  - Handler::Command を継承していただく必要があります。
+    - インスタンス変数として cfg,client があります
+    - このへんは、ExitCommandやらUpdateCommandを参考にしてください。
+
+### 後付け
+
+- IDCF crawlerを先に作成してからbot機能を追加したので、このような構成になってます。

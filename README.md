@@ -1,5 +1,7 @@
 # facebot
 crawling IDCF NETWORK ALERT
+and
+CHAT-OPS runtime by RonR.
 
 ## 使い方
 
@@ -43,3 +45,7 @@ crawling IDCF NETWORK ALERT
   - exec({cmd:, data:}) が呼ばれます
   - dataには、slackから通知された内容が設定されます
   - インスタンス変数として cfg,client があります
+
+### 後付け
+
+- IDCF crawlerを先に作成してからbot機能を追加したので、このような構成になってます。

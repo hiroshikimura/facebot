@@ -10,6 +10,7 @@ do
 
   if [ -e /var/tmp/facebot/update ]; then
     git pull
+    bundle install --path=vendor/bundle --local
     rm -rf /var/tmp/facebot/update
   fi
 

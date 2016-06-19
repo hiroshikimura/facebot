@@ -8,6 +8,7 @@ default: &default
   username: <%= ENV['IDCFUSER'] %>
   password: <%= ENV["IDCFPWD"] %>
   webhookurl: <%= ENV['URL'] %>
+  token: <%= ENV['TOKEN'] %>
 
 development:
   <<: *default

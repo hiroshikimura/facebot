@@ -8,8 +8,8 @@ default: &default
   username: <%= ENV['IDCFUSER'] %>
   password: <%= ENV["IDCFPWD"] %>
   webhookurl: <%= ENV['URL'] %>
-  token: 'xoxb-22124419495-beZFazbPWYWcTJmEh59QKqWy'
-  botname: 'dekaibot'
+  token: <%= ENV['TOKEN'] %>
+  botname: <%= ENV['BOTNAME'] %>
 
 development:
   <<: *default

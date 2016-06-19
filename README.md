@@ -44,7 +44,9 @@ CHAT-OPS runtime by RonR.
   - コマンド名はcase-insencitiveです
   - exec({cmd:, data:}) が呼ばれます
   - dataには、slackから通知された内容が設定されます
-  - インスタンス変数として cfg,client があります
+  - Handler::Command を継承していただく必要があります。
+    - インスタンス変数として cfg,client があります
+    - このへんは、ExitCommandやらUpdateCommandを参考にしてください。
 
 ### 後付け
 

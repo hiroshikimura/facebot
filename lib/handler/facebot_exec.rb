@@ -55,6 +55,7 @@ module Handler
         next unless valid_bot?(user, client)
 
         cmd = tokens.shift
+binding.pry
         find_handler(cmd)
           .new(cfg, client)
           .proc({

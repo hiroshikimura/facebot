@@ -8,7 +8,7 @@ while [ 1=1 ]
 do
   bundle exec rake facebot:exec["./config/account.yml"]
 
-  if [ -e /var/tmp/facebot/update ]: then
+  if [ -e /var/tmp/facebot/update ]; then
     git pull
     rm -rf /var/tmp/facebot/update
   fi

@@ -7,7 +7,7 @@ namespace :idcf do
     p args
     p 'setup completed.'
     Procedure::IdcfTask
-      .new(args[:config])
+      .new(YAML.load_file(args[:config])[Rails.env])
       .execute_initialize()
   end
 
@@ -19,7 +19,7 @@ namespace :idcf do
     p args
     p 'exec end'
     Procedure::IdcfTask
-      .new(args[:config])
+      .new(YAML.load_file(args[:config])[Rails.env])
       .execute_compare()
   end
 end

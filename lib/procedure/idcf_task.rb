@@ -53,7 +53,7 @@ URL : #{u}
 
     def initialize(config)
       begin
-        @cfg = YAML.load_file(config)[Rails.env]
+        @cfg = config
         @redis = redis_cli()
         @sender = SlackIf.new(@cfg)
       rescue => e
@@ -63,7 +63,8 @@ URL : #{u}
 
     def redis_cli
       # 個々の設定は適当
-      Redis.new(:host => "localhost", :port => 6379, :db => 3)
+      c = cfg['redis']
+      Redis.new(:host => c['hostname'], :port => c['port'], :db => c['db'])
     end
 
     def execute_initialize
@@ -106,6 +107,14 @@ URL : #{u}
       sender.post(what_new)
     end
 
+    def confirm
+binding.pry
+      # 現在発生しているインシデント
+      current_incidents = retrieve_incident(Mechanize.new)
+      # そのまま通知
+      sender.post(current_incidents)
+    end
+
     def retrieve_incident(agent)
       # credentials
       username = cfg['username']
@@ -142,9 +151,6 @@ URL : #{u}
       }
 
       incident_list
-    end
-
-    def refresh_incident(agent)
     end
 
     def compare_incident(current,last)

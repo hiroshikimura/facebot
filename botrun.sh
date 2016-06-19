@@ -3,10 +3,15 @@ cd `dirname $0`
 
 while [ 1=1 ]
 do
-  #git pull
   bundle exec rake facebot:exec["./config/account.yml"]
 
-  if [ -e /var/tmp/facebot_status ]; then
+  if [ -e /var/tmp/facebot/update ]: then
+    git pull
+    rm -rf /var/tmp/facebot/update
+  fi
+
+  if [ -e /var/tmp/facebot/restart ]; then
+    rm -rf /var/tmp/facebot/restart
     echo '再起動します'
   else
     echo '終了します'

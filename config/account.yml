@@ -6,10 +6,14 @@
 #
 default: &default
   username: <%= ENV['IDCFUSER'] %>
-  password: <%= ENV["IDCFPWD"] %>
+  password: <%= ENV['IDCFPWD'] %>
   webhookurl: <%= ENV['URL'] %>
   token: <%= ENV['TOKEN'] %>
   botname: <%= ENV['BOTNAME'] %>
+  redis:
+    hostname: 'localhost'
+    port: 6379
+    db: 3
 
 development:
   <<: *default

@@ -108,7 +108,6 @@ URL : #{u}
     end
 
     def confirm
-binding.pry
       # 現在発生しているインシデント
       current_incidents = retrieve_incident(Mechanize.new)
       # そのまま通知
